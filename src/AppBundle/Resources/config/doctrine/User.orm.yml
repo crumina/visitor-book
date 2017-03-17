@@ -1,0 +1,29 @@
+# src/AppBundle/Resources/config/doctrine/User.orm.yml
+AppBundle\Entity\User:
+  type: entity
+  table: user
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    email:
+      type: string
+      length: 255
+      unique: true
+    password:
+      type: string
+      length: 255
+      nullable: true
+    created_at:
+      type: datetime
+    updated_at:
+      type: datetime
+      nullable: true
+  oneToMany:
+    notes:
+      targetEntity: Note
+      mappedBy: author
+  lifecycleCallbacks:
+      prePersist: [ setCreatedAtValue ]
+      preUpdate: [ setUpdatedAtValue ]

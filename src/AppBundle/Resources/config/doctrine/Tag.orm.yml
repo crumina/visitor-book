@@ -1,0 +1,16 @@
+# src/AppBundle/Resources/config/doctrine/Tag.orm.yml
+AppBundle\Entity\Tag:
+  type: entity
+  table: tag
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    title:
+      type: string
+      length: 255
+  oneToMany:
+      note_tags:
+        targetEntity: NoteTag
+        mappedBy: tag

@@ -1,0 +1,30 @@
+# src/AppBundle/Resources/config/doctrine/Note.orm.yml
+AppBundle\Entity\Note:
+  type: entity
+  repositoryClass: AppBundle\Repository\NoteRepository
+  table: note
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    body:
+      type: text
+    created_at:
+      type: datetime
+    updated_at:
+      type: datetime
+      nullable: true
+  manyToOne:
+    author:
+      targetEntity: User
+      inversedBy: notes
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
+    note_tags:
+      targetEntity: NoteTag
+      mappedBy: note
+  lifecycleCallbacks:
+      prePersist: [ setCreatedAtValue ]
+      preUpdate: [ setUpdatedAtValue ]

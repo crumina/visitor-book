@@ -1,0 +1,21 @@
+# src/AppBundle/Resources/config/doctrine/NoteTag.orm.yml
+AppBundle\Entity\NoteTag:
+  type: entity
+  table: note_tag
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  manyToOne:
+    note:
+      targetEntity: Note
+      inversedBy: note_tags
+      joinColumn:
+        name: note_id
+        referencedColumnName: id
+    tag:
+      targetEntity: Tag
+      inversedBy: note_tags
+      joinColumn:
+        name: tag_id
+        referencedColumnName: id
